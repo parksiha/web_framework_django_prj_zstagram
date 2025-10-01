@@ -1,16 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>FEEDS</title>
-</head>
-<body>
-    <h1>Feed Page</h1>
+{% extends 'base.html' %}
 
-    <div>{{ user.username }}</div>
+{% block content %}
+    <h1>Feed Page</h1>
+    {% if posts %}
+        {% for post in posts %}
+            <article>
+                <table style="width:100%">
+                  <tr>
+                    <th>ID</th>
+                    <th>작성자</th>
+                      {% if post.user.profile_image %}
+                        <th>프로필이미지</th>
+                      {% endif %}
+                      <th>내용</th>
+                      <th>링크</th>
+                  </tr>
+
+                  <tr>
+                    <td>{{ post.id }}</td>
+                      <td>{{ post.user.username }}</td>
+                      {% if post.user.profile_image %}
+                        <td>
+                            <img src="{{ post.user.profile_image.url }}">
+                        </td>
+                      {% endif %}
+                      <td>{{ post.content }}</td>
+                      <td><a href="/posts/{{ post.id }}/">바로가기</a></td>
+                  </tr>
+                </table>
+                <br>
+
+            </article>
+        {% endfor %}
+    {% endif %}
+
+    <div class="fddiv">{{ user.username }}</div>
     <div>ID : {{ user.id }}</div>
 
     <a href="/users/logout/">로그아웃</a>
-
-</body>
-</html>
+{% endblock %}

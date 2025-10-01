@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zstagram</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <nav class="navbar">
+        <ul>
+          <li><a href="/users/login">log-in</a></li>
+          <li><a href="/users/signup">sign-up</a></li>
+        </ul>
+    </nav>
+    <br>
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

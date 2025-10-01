@@ -1,17 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!--
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Sign up</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
+-->
     <h2> Sign UP</h2>
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_div }}
-        <button type="submit">회원가입</button>
+        <button class="sibtn" type="submit">회원가입</button>
     </form>
-
+{% endblock %}
+<!--
 </body>
 </html>
+-->

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>상세 페이지</h2>
+  {% if post %}
+            <article>
+                <table style="width:100%">
+                  <tr>
+                    <th>ID</th>
+                    <th>작성자</th>
+                      {% if post.user.profile_image %}
+                        <th>프로필이미지</th>
+                      {% endif %}
+                  </tr>
+                  <tr>
+                    <td>{{ post.id }}</td>
+                      <td>{{ post.user.username }}</td>
+                      {% if post.user.profile_image %}
+                        <td>
+                            <img src="{{ post.user.profile_image.url }}">
+                        </td>
+                      {% endif %}
+                  </tr>
+                    <tr>
+                        <td>글 내용</td>
+                        <td>
+                            {% for image in post.postimage_set.all %}
+                                <img src="{{ image.photo.url }}">
+                            {% empty %}
+                                None Profile Image
+                            {% endfor %}
+                        </td>
+                        <td colspan="2">{{ post.content }}</td>
+                    </tr>
+
+                </table>
+            </article>
+            <ul>
+                    <h4>댓글 목록</h4>
+                  {% for comment in post.comment_set.all %}
+                    <li>{{ comment.content }} - {{ comment.comment }}</li>
+                  {% empty %}
+                    <li>아직 댓글이 없습니다.</li>
+                  {% endfor %}
+                </ul>
+
+                <div>
+                <form method="post" action="/posts/comment_add/">
+                    {% csrf_token %}
+                    <input type="hidden" name="post" value="{{ post.id }}">
+                    {{ comment_form.content }}
+                    <button type="submit">댓글달기</button>
+                </form>
+                </div>
+    {% endif %}
+    <h3><a href="/posts/feeds/">목록</a></h3>
+    <div class="fddiv">{{ user.username }}</div>
+    <div>ID : {{ user.id }}</div>
+
+    <a href="/users/logout/">로그아웃</a>
+
+{% endblock %}

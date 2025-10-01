@@ -1,18 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>LOGIN</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
   <h1>Log-in</h1>
   {% if form %}
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">로그인</button>
+        <button class="lgbtn" type="submit">로그인</button>
     </form>
   {% endif %}
     <a href="http://127.0.0.1:8000/users/signup/">sign up</a>
-</body>
-</html>
+{% endblock %}
